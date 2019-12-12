@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/letian/Benchmark/MDN
+CMAKE_SOURCE_DIR = /home/letian/Documents/MDN
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/letian/Benchmark/MDN/build
+CMAKE_BINARY_DIR = /home/letian/Documents/MDN/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/letian/Benchmark/MDN/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/letian/Benchmark/MDN/build/CMakeFiles /home/letian/Benchmark/MDN/build/src/CMakeFiles/progress.marks
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/letian/Benchmark/MDN/build/CMakeFiles 0
+	cd /home/letian/Documents/MDN/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/letian/Documents/MDN/build/CMakeFiles /home/letian/Documents/MDN/build/src/CMakeFiles/progress.marks
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/letian/Documents/MDN/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/letian/Benchmark/MDN/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/letian/Documents/MDN/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/Test.dir/rule:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Test.dir/rule
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Test.dir/rule
 .PHONY : src/CMakeFiles/Test.dir/rule
 
 # Convenience name for target.
@@ -122,35 +122,35 @@ Test: src/CMakeFiles/Test.dir/rule
 
 # fast build rule for target.
 Test/fast:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/build
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/build
 .PHONY : Test/fast
 
-tools.o: tools.cpp.o
+MDN.o: MDN.cpp.o
 
-.PHONY : tools.o
+.PHONY : MDN.o
 
 # target to build an object file
-tools.cpp.o:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/tools.cpp.o
-.PHONY : tools.cpp.o
+MDN.cpp.o:
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/MDN.cpp.o
+.PHONY : MDN.cpp.o
 
-tools.i: tools.cpp.i
+MDN.i: MDN.cpp.i
 
-.PHONY : tools.i
+.PHONY : MDN.i
 
 # target to preprocess a source file
-tools.cpp.i:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/tools.cpp.i
-.PHONY : tools.cpp.i
+MDN.cpp.i:
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/MDN.cpp.i
+.PHONY : MDN.cpp.i
 
-tools.s: tools.cpp.s
+MDN.s: MDN.cpp.s
 
-.PHONY : tools.s
+.PHONY : MDN.s
 
 # target to generate assembly for a file
-tools.cpp.s:
-	cd /home/letian/Benchmark/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/tools.cpp.s
-.PHONY : tools.cpp.s
+MDN.cpp.s:
+	cd /home/letian/Documents/MDN/build && $(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/MDN.cpp.s
+.PHONY : MDN.cpp.s
 
 # Help Target
 help:
@@ -161,9 +161,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Test"
-	@echo "... tools.o"
-	@echo "... tools.i"
-	@echo "... tools.s"
+	@echo "... MDN.o"
+	@echo "... MDN.i"
+	@echo "... MDN.s"
 .PHONY : help
 
 
@@ -175,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/letian/Benchmark/MDN/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/letian/Documents/MDN/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

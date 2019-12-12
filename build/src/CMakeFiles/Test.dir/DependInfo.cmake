@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/letian/Benchmark/MDN/src/tools.cpp" "/home/letian/Benchmark/MDN/build/src/CMakeFiles/Test.dir/tools.cpp.o"
+  "/home/letian/Documents/MDN/src/MDN.cpp" "/home/letian/Documents/MDN/build/src/CMakeFiles/Test.dir/MDN.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

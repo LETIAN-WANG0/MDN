@@ -1,4 +1,4 @@
-# Install script for directory: /home/letian/Benchmark/MDN/src
+# Install script for directory: /home/letian/Documents/MDN/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

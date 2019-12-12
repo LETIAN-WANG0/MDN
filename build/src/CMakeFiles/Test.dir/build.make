@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/letian/Benchmark/MDN
+CMAKE_SOURCE_DIR = /home/letian/Documents/MDN
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/letian/Benchmark/MDN/build
+CMAKE_BINARY_DIR = /home/letian/Documents/MDN/build
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/Test.dir/depend.make
@@ -57,58 +57,58 @@ include src/CMakeFiles/Test.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/Test.dir/flags.make
 
-src/CMakeFiles/Test.dir/tools.cpp.o: src/CMakeFiles/Test.dir/flags.make
-src/CMakeFiles/Test.dir/tools.cpp.o: ../src/tools.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/letian/Benchmark/MDN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/Test.dir/tools.cpp.o"
-	cd /home/letian/Benchmark/MDN/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Test.dir/tools.cpp.o -c /home/letian/Benchmark/MDN/src/tools.cpp
+src/CMakeFiles/Test.dir/MDN.cpp.o: src/CMakeFiles/Test.dir/flags.make
+src/CMakeFiles/Test.dir/MDN.cpp.o: ../src/MDN.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/letian/Documents/MDN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/Test.dir/MDN.cpp.o"
+	cd /home/letian/Documents/MDN/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Test.dir/MDN.cpp.o -c /home/letian/Documents/MDN/src/MDN.cpp
 
-src/CMakeFiles/Test.dir/tools.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Test.dir/tools.cpp.i"
-	cd /home/letian/Benchmark/MDN/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/letian/Benchmark/MDN/src/tools.cpp > CMakeFiles/Test.dir/tools.cpp.i
+src/CMakeFiles/Test.dir/MDN.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Test.dir/MDN.cpp.i"
+	cd /home/letian/Documents/MDN/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/letian/Documents/MDN/src/MDN.cpp > CMakeFiles/Test.dir/MDN.cpp.i
 
-src/CMakeFiles/Test.dir/tools.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Test.dir/tools.cpp.s"
-	cd /home/letian/Benchmark/MDN/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/letian/Benchmark/MDN/src/tools.cpp -o CMakeFiles/Test.dir/tools.cpp.s
+src/CMakeFiles/Test.dir/MDN.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Test.dir/MDN.cpp.s"
+	cd /home/letian/Documents/MDN/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/letian/Documents/MDN/src/MDN.cpp -o CMakeFiles/Test.dir/MDN.cpp.s
 
-src/CMakeFiles/Test.dir/tools.cpp.o.requires:
+src/CMakeFiles/Test.dir/MDN.cpp.o.requires:
 
-.PHONY : src/CMakeFiles/Test.dir/tools.cpp.o.requires
+.PHONY : src/CMakeFiles/Test.dir/MDN.cpp.o.requires
 
-src/CMakeFiles/Test.dir/tools.cpp.o.provides: src/CMakeFiles/Test.dir/tools.cpp.o.requires
-	$(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/tools.cpp.o.provides.build
-.PHONY : src/CMakeFiles/Test.dir/tools.cpp.o.provides
+src/CMakeFiles/Test.dir/MDN.cpp.o.provides: src/CMakeFiles/Test.dir/MDN.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/MDN.cpp.o.provides.build
+.PHONY : src/CMakeFiles/Test.dir/MDN.cpp.o.provides
 
-src/CMakeFiles/Test.dir/tools.cpp.o.provides.build: src/CMakeFiles/Test.dir/tools.cpp.o
+src/CMakeFiles/Test.dir/MDN.cpp.o.provides.build: src/CMakeFiles/Test.dir/MDN.cpp.o
 
 
 # Object files for target Test
 Test_OBJECTS = \
-"CMakeFiles/Test.dir/tools.cpp.o"
+"CMakeFiles/Test.dir/MDN.cpp.o"
 
 # External object files for target Test
 Test_EXTERNAL_OBJECTS =
 
-src/libTest.a: src/CMakeFiles/Test.dir/tools.cpp.o
+src/libTest.a: src/CMakeFiles/Test.dir/MDN.cpp.o
 src/libTest.a: src/CMakeFiles/Test.dir/build.make
 src/libTest.a: src/CMakeFiles/Test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/letian/Benchmark/MDN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libTest.a"
-	cd /home/letian/Benchmark/MDN/build/src && $(CMAKE_COMMAND) -P CMakeFiles/Test.dir/cmake_clean_target.cmake
-	cd /home/letian/Benchmark/MDN/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Test.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/letian/Documents/MDN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libTest.a"
+	cd /home/letian/Documents/MDN/build/src && $(CMAKE_COMMAND) -P CMakeFiles/Test.dir/cmake_clean_target.cmake
+	cd /home/letian/Documents/MDN/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/Test.dir/build: src/libTest.a
 
 .PHONY : src/CMakeFiles/Test.dir/build
 
-src/CMakeFiles/Test.dir/requires: src/CMakeFiles/Test.dir/tools.cpp.o.requires
+src/CMakeFiles/Test.dir/requires: src/CMakeFiles/Test.dir/MDN.cpp.o.requires
 
 .PHONY : src/CMakeFiles/Test.dir/requires
 
 src/CMakeFiles/Test.dir/clean:
-	cd /home/letian/Benchmark/MDN/build/src && $(CMAKE_COMMAND) -P CMakeFiles/Test.dir/cmake_clean.cmake
+	cd /home/letian/Documents/MDN/build/src && $(CMAKE_COMMAND) -P CMakeFiles/Test.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/Test.dir/clean
 
 src/CMakeFiles/Test.dir/depend:
-	cd /home/letian/Benchmark/MDN/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/letian/Benchmark/MDN /home/letian/Benchmark/MDN/src /home/letian/Benchmark/MDN/build /home/letian/Benchmark/MDN/build/src /home/letian/Benchmark/MDN/build/src/CMakeFiles/Test.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/letian/Documents/MDN/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/letian/Documents/MDN /home/letian/Documents/MDN/src /home/letian/Documents/MDN/build /home/letian/Documents/MDN/build/src /home/letian/Documents/MDN/build/src/CMakeFiles/Test.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/Test.dir/depend
 
