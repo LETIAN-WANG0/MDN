@@ -114,7 +114,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=eigen_test
+CMAKE_PROJECT_NAME:STATIC=MDN
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -165,14 +165,11 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Dependencies for target
-Test_LIB_DEPENDS:STATIC=
+//Value Computed by CMake
+MDN_BINARY_DIR:STATIC=/home/letian/Documents/MDN/build
 
 //Value Computed by CMake
-eigen_test_BINARY_DIR:STATIC=/home/letian/Documents/MDN/build
-
-//Value Computed by CMake
-eigen_test_SOURCE_DIR:STATIC=/home/letian/Documents/MDN
+MDN_SOURCE_DIR:STATIC=/home/letian/Documents/MDN
 
 
 ########################
@@ -265,7 +262,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

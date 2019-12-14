@@ -111,57 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named eigen_test
+# Target rules for targets named MDN
 
 # Build rule for target.
-eigen_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 eigen_test
-.PHONY : eigen_test
+MDN: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MDN
+.PHONY : MDN
 
 # fast build rule for target.
-eigen_test/fast:
-	$(MAKE) -f CMakeFiles/eigen_test.dir/build.make CMakeFiles/eigen_test.dir/build
-.PHONY : eigen_test/fast
+MDN/fast:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/build
+.PHONY : MDN/fast
 
-#=============================================================================
-# Target rules for targets named Test
+src/MDN.o: src/MDN.cpp.o
 
-# Build rule for target.
-Test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Test
-.PHONY : Test
-
-# fast build rule for target.
-Test/fast:
-	$(MAKE) -f src/CMakeFiles/Test.dir/build.make src/CMakeFiles/Test.dir/build
-.PHONY : Test/fast
-
-main.o: main.cpp.o
-
-.PHONY : main.o
+.PHONY : src/MDN.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/eigen_test.dir/build.make CMakeFiles/eigen_test.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/MDN.cpp.o:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/MDN.cpp.o
+.PHONY : src/MDN.cpp.o
 
-main.i: main.cpp.i
+src/MDN.i: src/MDN.cpp.i
 
-.PHONY : main.i
+.PHONY : src/MDN.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/eigen_test.dir/build.make CMakeFiles/eigen_test.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/MDN.cpp.i:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/MDN.cpp.i
+.PHONY : src/MDN.cpp.i
 
-main.s: main.cpp.s
+src/MDN.s: src/MDN.cpp.s
 
-.PHONY : main.s
+.PHONY : src/MDN.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/eigen_test.dir/build.make CMakeFiles/eigen_test.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/MDN.cpp.s:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/MDN.cpp.s
+.PHONY : src/MDN.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/MDN.dir/build.make CMakeFiles/MDN.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -171,11 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... eigen_test"
-	@echo "... Test"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... MDN"
+	@echo "... src/MDN.o"
+	@echo "... src/MDN.i"
+	@echo "... src/MDN.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

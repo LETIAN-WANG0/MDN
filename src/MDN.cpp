@@ -1,5 +1,5 @@
 #include <iostream>
-#include </home/letian/Benchmark/MDN/Eigen/Dense>
+#include <Dense>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -8,6 +8,7 @@ using namespace std;
 using namespace Eigen;
 #include <math.h>
 #include "MDN.h"
+#include <direct.h>
 
 MDN::MDN()
 {
@@ -21,7 +22,7 @@ MDN::MDN()
     b0 = MatrixXd::Ones(16,1);
     b1 = MatrixXd::Ones(16,1);
     b2 = MatrixXd::Ones(6,1);
-
+	
     path_W0 = "/home/letian/Benchmark/MDN/Parameter/weights_h0.txt";
     path_b0 = "/home/letian/Benchmark/MDN/Parameter/bias_h0.txt";
     path_W1 = "/home/letian/Benchmark/MDN/Parameter/weights_h1.txt";

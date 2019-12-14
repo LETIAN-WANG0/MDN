@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/letian/Documents/MDN/Eigen -I/home/letian/Documents/MDN/include 
 

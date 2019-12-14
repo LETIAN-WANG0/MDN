@@ -4,12 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/letian/Documents/MDN/src/MDN.cpp" "/home/letian/Documents/MDN/build/src/CMakeFiles/Test.dir/MDN.cpp.o"
+  "/home/letian/Documents/MDN/src/MDN.cpp" "/home/letian/Documents/MDN/build/CMakeFiles/MDN.dir/src/MDN.cpp.o"
+  "/home/letian/Documents/MDN/src/main.cpp" "/home/letian/Documents/MDN/build/CMakeFiles/MDN.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../Eigen"
+  "../include"
   )
 
 # Targets to which this target links.

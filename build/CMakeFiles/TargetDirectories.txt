@@ -1,6 +1,3 @@
 /home/letian/Documents/MDN/build/CMakeFiles/edit_cache.dir
 /home/letian/Documents/MDN/build/CMakeFiles/rebuild_cache.dir
-/home/letian/Documents/MDN/build/CMakeFiles/eigen_test.dir
-/home/letian/Documents/MDN/build/src/CMakeFiles/edit_cache.dir
-/home/letian/Documents/MDN/build/src/CMakeFiles/rebuild_cache.dir
-/home/letian/Documents/MDN/build/src/CMakeFiles/Test.dir
+/home/letian/Documents/MDN/build/CMakeFiles/MDN.dir

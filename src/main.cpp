@@ -1,6 +1,6 @@
 #include <iostream>
-#include </home/letian/Documents/MDN/Eigen/Dense>
-#include "/home/letian/Documents/MDN/src/MDN.h"
+#include <Dense>
+#include "MDN.h"
 #include <vector>
 #include <fstream>
 #include <vector>
