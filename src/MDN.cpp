@@ -8,7 +8,7 @@ using namespace std;
 using namespace Eigen;
 #include <math.h>
 #include "MDN.h"
-#include <direct.h>
+//#include <direct.h>
 
 MDN::MDN()
 {
@@ -23,16 +23,16 @@ MDN::MDN()
     b1 = MatrixXd::Ones(16,1);
     b2 = MatrixXd::Ones(6,1);
 	
-    path_W0 = "/home/letian/Benchmark/MDN/Parameter/weights_h0.txt";
-    path_b0 = "/home/letian/Benchmark/MDN/Parameter/bias_h0.txt";
-    path_W1 = "/home/letian/Benchmark/MDN/Parameter/weights_h1.txt";
-    path_b1 = "/home/letian/Benchmark/MDN/Parameter/bias_h1.txt";
-    path_W2 = "/home/letian/Benchmark/MDN/Parameter/weights_h2.txt";
-    path_b2 = "/home/letian/Benchmark/MDN/Parameter/bias_h2.txt";
-    path_Wc = "/home/letian/Benchmark/MDN/Parameter/weights_rnn_candidate.txt";
-    path_bc = "/home/letian/Benchmark/MDN/Parameter/bias_rnn_candidate.txt";
-    path_WG = "/home/letian/Benchmark/MDN/Parameter/weights_rnn_gate.txt";
-    path_bG = "/home/letian/Benchmark/MDN/Parameter/bias_rnn_gate.txt";
+    path_W0 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h0.txt";
+    path_b0 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h0.txt";
+    path_W1 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h1.txt";
+    path_b1 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h1.txt";
+    path_W2 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h2.txt";
+    path_b2 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h2.txt";
+    path_Wc = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_rnn_candidate.txt";
+    path_bc = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_rnn_candidate.txt";
+    path_WG = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_rnn_gate.txt";
+    path_bG = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_rnn_gate.txt";
 }
 
 void MDN::sigmoid(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A, std::vector<Eigen::MatrixXd>& cache)
@@ -298,7 +298,7 @@ void MDN::pdf_mix2D_Gaussian(Eigen::MatrixXd& Input_Speed, double& likelihood, E
 	z = p1.cwiseAbs2() - 2 * (cor * p1 * p2) + p2.cwiseAbs2();
 	result = (-(z / 2 * p3.cwiseInverse()));
 	result = result.array().exp();
-	k = 1 / sqrt(2 * M_PI);
+	k = 1 / (2 * M_PI);
 	final_result = result.array() / (p3.array().sqrt() * sigma1.array() * sigma2.array()) * k;
 	return_value = final_result * alpha;
 	likelihood = return_value.sum();

@@ -1,0 +1,15 @@
+x_list tf.unstack(self.x, axis=1) 按照time_step分开，每个array：（1016,4）
+x.shape = (None, Nt_in, N_in)
+
+Nt_in = input_shape[1] =  5
+N_in = input_shape[-1] = 4
+
+input_shape = dimension[0]
+
+input_shape = train_data.shape
+train_data = input_data_raw
+input_data_raw.shape = (1016,5,4)
+
+
+
+

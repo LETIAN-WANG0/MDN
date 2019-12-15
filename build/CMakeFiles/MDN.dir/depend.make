@@ -214,7 +214,7 @@ CMakeFiles/MDN.dir/src/MDN.cpp.o: ../Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/MDN.dir/src/MDN.cpp.o: ../Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/MDN.dir/src/MDN.cpp.o: ../Eigen/src/plugins/MatrixCwiseUnaryOps.h
 CMakeFiles/MDN.dir/src/MDN.cpp.o: ../include/MDN.h
-CMakeFiles/MDN.dir/src/MDN.cpp.o: /home/letian/Benchmark/MDN/Eigen/Dense
+CMakeFiles/MDN.dir/src/MDN.cpp.o: ../Eigen/Dense
 CMakeFiles/MDN.dir/src/MDN.cpp.o: ../src/MDN.cpp
 
 CMakeFiles/MDN.dir/src/main.cpp.o: ../Eigen/Cholesky
@@ -430,6 +430,6 @@ CMakeFiles/MDN.dir/src/main.cpp.o: ../Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/MDN.dir/src/main.cpp.o: ../Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/MDN.dir/src/main.cpp.o: ../Eigen/src/plugins/MatrixCwiseUnaryOps.h
 CMakeFiles/MDN.dir/src/main.cpp.o: ../include/MDN.h
-CMakeFiles/MDN.dir/src/main.cpp.o: /home/letian/Benchmark/MDN/Eigen/Dense
+CMakeFiles/MDN.dir/src/main.cpp.o: ../Eigen/Dense
 CMakeFiles/MDN.dir/src/main.cpp.o: ../src/main.cpp
 
