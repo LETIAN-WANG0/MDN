@@ -8,8 +8,8 @@
 using namespace std;
 using namespace Eigen;
 int input_length = 4;		// Length of input(x1, y1, x2, y2)
-int GRU_Neuron_Num = 8;			// GRU Neuron Number()
-int Hidden_dim = 16;			// DNN Hidden layer dimension()
+int GRU_Neuron_Num = 64;			// GRU Neuron Number()
+int Hidden_dim = 64;			// DNN Hidden layer dimension()
 MDN::MDN()
 {
     WG = MatrixXd::Ones(input_length + GRU_Neuron_Num, GRU_Neuron_Num*2);
@@ -165,6 +165,10 @@ void MDN::Post_process(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output)
 	Soft_max(weight, weight);
 	sigma = sigma.array().exp();
 	tanh(cor, cor);
+	cout << "weight: " << weight << endl;
+	cout << "mu: " << mu << endl;
+	cout << "sigma: " << sigma << endl;
+	cout << "cor: " << cor << endl;
 	output << weight,
 			  mu,
 			  sigma,

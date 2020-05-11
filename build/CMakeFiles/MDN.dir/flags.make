@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/letian/Benchmark(copy)/MDN/Eigen" -I"/home/letian/Benchmark(copy)/MDN/include" 
+CXX_INCLUDES = -I/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Eigen -I/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/include 
 

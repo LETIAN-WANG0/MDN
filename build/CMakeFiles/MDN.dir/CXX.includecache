@@ -1069,7 +1069,7 @@ lapacke_mangling.h
 ../include/MDN.h
 iostream
 -
-/home/letian/Benchmark(copy)/MDN/Eigen/Dense
+Dense
 -
 vector
 -
@@ -1082,23 +1082,7 @@ string
 sstream
 -
 
-/home/letian/Benchmark(copy)/MDN/Eigen/Dense
-Core
-/home/letian/Benchmark(copy)/MDN/Eigen/Core
-LU
-/home/letian/Benchmark(copy)/MDN/Eigen/LU
-Cholesky
-/home/letian/Benchmark(copy)/MDN/Eigen/Cholesky
-QR
-/home/letian/Benchmark(copy)/MDN/Eigen/QR
-SVD
-/home/letian/Benchmark(copy)/MDN/Eigen/SVD
-Geometry
-/home/letian/Benchmark(copy)/MDN/Eigen/Geometry
-Eigenvalues
-/home/letian/Benchmark(copy)/MDN/Eigen/Eigenvalues
-
-/home/letian/Benchmark(copy)/MDN/src/MDN.cpp
+/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/src/MDN.cpp
 iostream
 -
 Dense
@@ -1111,18 +1095,16 @@ string
 -
 sstream
 -
-math.h
--
 MDN.h
-/home/letian/Benchmark(copy)/MDN/src/MDN.h
+/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/src/MDN.h
 
-/home/letian/Benchmark(copy)/MDN/src/main.cpp
+/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/src/main.cpp
 iostream
 -
 Dense
 -
 MDN.h
-/home/letian/Benchmark(copy)/MDN/src/MDN.h
+/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/src/MDN.h
 vector
 -
 fstream
