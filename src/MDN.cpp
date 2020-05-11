@@ -4,107 +4,95 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include "MDN.h"
 using namespace std;
 using namespace Eigen;
-#include <math.h>
-#include "MDN.h"
-//#include <direct.h>
-
+int input_length = 4;		// Length of input(x1, y1, x2, y2)
+int GRU_Neuron_Num = 8;			// GRU Neuron Number()
+int Hidden_dim = 16;			// DNN Hidden layer dimension()
 MDN::MDN()
 {
-    WG = MatrixXd::Ones(12,16);
-    bG = MatrixXd::Ones(16,1);
-    Wc = MatrixXd::Ones(12,8);
-    bc = MatrixXd::Ones(8,1);
-    W0 = MatrixXd::Ones(8,16);
-    W1 = MatrixXd::Ones(16,16);
-    W2 = MatrixXd::Ones(16,6);
-    b0 = MatrixXd::Ones(16,1);
-    b1 = MatrixXd::Ones(16,1);
+    WG = MatrixXd::Ones(input_length + GRU_Neuron_Num, GRU_Neuron_Num*2);
+    bG = MatrixXd::Ones(GRU_Neuron_Num*2,1);
+    Wc = MatrixXd::Ones(input_length + GRU_Neuron_Num, GRU_Neuron_Num);
+    bc = MatrixXd::Ones(GRU_Neuron_Num, 1);
+    W0 = MatrixXd::Ones(GRU_Neuron_Num, Hidden_dim);
+    W1 = MatrixXd::Ones(Hidden_dim,Hidden_dim);
+    W2 = MatrixXd::Ones(Hidden_dim,6);
+    b0 = MatrixXd::Ones(Hidden_dim,1);
+    b1 = MatrixXd::Ones(Hidden_dim,1);
     b2 = MatrixXd::Ones(6,1);
+	        //    /home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h0.txt
+    path_W0 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h0.txt";
+    path_b0 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h0.txt";
+    path_W1 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h1.txt";
+    path_b1 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h1.txt";
+    path_W2 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h2.txt";
+    path_b2 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h2.txt";
+    path_Wc = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_rnn_candidate.txt";
+    path_bc = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_rnn_candidate.txt";
+    path_WG = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_rnn_gate.txt";
+    path_bG = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_rnn_gate.txt";
 	
-    path_W0 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h0.txt";
-    path_b0 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h0.txt";
-    path_W1 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h1.txt";
-    path_b1 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h1.txt";
-    path_W2 = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_h2.txt";
-    path_b2 = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_h2.txt";
-    path_Wc = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_rnn_candidate.txt";
-    path_bc = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_rnn_candidate.txt";
-    path_WG = "/home/letian/Benchmark(copy)/MDN/Parameter/weights_rnn_gate.txt";
-    path_bG = "/home/letian/Benchmark(copy)/MDN/Parameter/bias_rnn_gate.txt";
 }
 
-void MDN::sigmoid(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A, std::vector<Eigen::MatrixXd>& cache)
+void MDN::sigmoid(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A)
 {
 	A = 1 / (1 + (-Z).array().exp());
 	assert(A.size() == Z.size());
-	cache.push_back(Z);
 }
 
-void MDN::relu(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A, std::vector<Eigen::MatrixXd>& cache)
+void MDN::relu(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A)
 {
 	A = Z.array().max(0);
 	assert(A.rows() == Z.rows());
 	assert(A.cols() == Z.cols());
-	cache.push_back(Z);
 }
 
-void MDN::tanh(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A, std::vector<Eigen::MatrixXd>& cache)
+void MDN::tanh(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A)
 {
 	A = ((Z).array().exp() - (-Z).array().exp()) / ((Z).array().exp() + (-Z).array().exp());
 	assert(A.size() == Z.size());
-	cache.push_back(Z);
 }
 
-void MDN::Soft_max(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A, std::vector<Eigen::MatrixXd>& cache)
+void MDN::Soft_max(const Eigen::MatrixXd& Z, Eigen::MatrixXd& A)
 {
 	A = Z.array().exp() / Z.array().exp().sum();
-	cache.push_back(Z);
 }
 
-void MDN::linear_forward(const Eigen::MatrixXd& A, const Eigen::MatrixXd& W, const Eigen::VectorXd& b, Eigen::MatrixXd& Z, std::vector<Eigen::MatrixXd>& cache)
+void MDN::linear_forward(const Eigen::MatrixXd& A, const Eigen::MatrixXd& W, const Eigen::VectorXd& b, Eigen::MatrixXd& Z)
 {
 	Z = ((A * W).transpose() + b).transpose();
 	assert(Z.rows() == A.rows());
 	assert(Z.cols() == W.cols());
-	cache.push_back(A);
-	cache.push_back(W);
-	cache.push_back(b); // VectorXd隐式转换为MatrixXd
 }
 
-void MDN::linear_activation_forward(const Eigen::MatrixXd& A_prev, const Eigen::MatrixXd& W, const Eigen::VectorXd& b, const std::string activation, Eigen::MatrixXd& A, std::vector<std::vector<Eigen::MatrixXd> >& cache)
+void MDN::linear_activation_forward(const Eigen::MatrixXd& A_prev, const Eigen::MatrixXd& W, const Eigen::VectorXd& b, const std::string activation, Eigen::MatrixXd& A)
 {
 	Eigen::MatrixXd Z;
-	std::vector<Eigen::MatrixXd> linear_cache;
-	std::vector<Eigen::MatrixXd> activation_cache;
 	if (activation == "sigmoid") {
-		linear_forward(A_prev, W, b, Z, linear_cache);
-		sigmoid(Z, A, activation_cache);
+		linear_forward(A_prev, W, b, Z);
+		sigmoid(Z, A);
 	}
 	else if (activation == "relu") {
-		linear_forward(A_prev, W, b, Z, linear_cache);
-		relu(Z, A, activation_cache);
+		linear_forward(A_prev, W, b, Z);
+		relu(Z, A);
 	}
 	else if (activation == "tanh") {
-		linear_forward(A_prev, W, b, Z, linear_cache);
-		tanh(Z, A, activation_cache);
+		linear_forward(A_prev, W, b, Z);
+		tanh(Z, A);
 	}
 
 	assert(A.rows() == A_prev.rows());
 	assert(A.cols() == W.cols());
-	cache.push_back(linear_cache);
-	cache.push_back(activation_cache);
 }
 
 
-void MDN::GRU_Cell(const Eigen::MatrixXd& c_prev, Eigen::MatrixXd& x, Eigen::MatrixXd& c, Eigen::MatrixXd& a, 
+void MDN::GRU_Cell(const Eigen::MatrixXd& c_prev, Eigen::MatrixXd& x_input, Eigen::MatrixXd& c_next, 
    const Eigen::MatrixXd& WG, const Eigen::VectorXd& bG,  const Eigen::MatrixXd& Wc,const Eigen::MatrixXd& bc)
 {
-	Eigen::MatrixXd conc(1, c_prev.cols()+x.cols());
-	Eigen::MatrixXd conc_for_candidate(1, c_prev.cols()+x.cols());
-	std::vector<std::vector<Eigen::MatrixXd> > cache_u;
-	std::vector<std::vector<Eigen::MatrixXd> > cache_r;
+	Eigen::MatrixXd conc(1, c_prev.cols()+x_input.cols());
+	Eigen::MatrixXd conc_for_candidate(1, c_prev.cols()+x_input.cols());
 	Eigen::MatrixXd ones = MatrixXd::Ones(1, c_prev.cols());
 	Eigen::MatrixXd Gate;
 	Eigen::MatrixXd Gate_r;
@@ -113,50 +101,49 @@ void MDN::GRU_Cell(const Eigen::MatrixXd& c_prev, Eigen::MatrixXd& x, Eigen::Mat
 	int c_length = c_prev.cols();
 
 	// concatenate
-	conc<<x, c_prev;
+	conc<<x_input, c_prev;
 	// Gates
-	linear_activation_forward(conc, WG, bG, "sigmoid", Gate, cache_u);
+	linear_activation_forward(conc, WG, bG, "sigmoid", Gate);
 	Gate_r = Gate.block(0,0,1,c_length);
 	Gate_u = Gate.block(0,c_length,1,c_length);
 	// conc_for_candidate, transform to array for element-wise multiplying, and transform back to matrix
-	conc_for_candidate << x, (Gate_r.array() * c_prev.array()).matrix();
+	conc_for_candidate << x_input, (Gate_r.array() * c_prev.array()).matrix();
 	// candidate	
-	linear_activation_forward(conc_for_candidate, Wc, bc, "tanh", c_candidate, cache_r);
+	linear_activation_forward(conc_for_candidate, Wc, bc, "tanh", c_candidate);
 	// State and Output
-	c = (Gate_u.array() * c_prev.array()).matrix() + ((ones.array() - Gate_u.array()) * c_candidate.array() ).matrix();
-	a = c;
+	c_next = (Gate_u.array() * c_prev.array()).matrix() + ((ones.array() - Gate_u.array()) * c_candidate.array() ).matrix();
 }
 
-// x is the input(5,4), with 5 timestep
-void MDN::GRU_Foward(Eigen::MatrixXd& x, Eigen::MatrixXd& c, Eigen::MatrixXd& a, 
+// x_input is the input(5,4), with 5 timestep
+void MDN::GRU_Foward(Eigen::MatrixXd& input, Eigen::MatrixXd& output,  
 const Eigen::MatrixXd& WG, const Eigen::MatrixXd& bG, const Eigen::MatrixXd& Wc,const Eigen::MatrixXd& bc)
 {
 	// Define the variables
-	MatrixXd c1(1,8);
-    MatrixXd a1(1,8);
-	MatrixXd c2(1,8);
-    MatrixXd a2(1,8);
-	MatrixXd c3(1,8);
-    MatrixXd a3(1,8);
-	MatrixXd c4(1,8);
-    MatrixXd a4(1,8);
+	MatrixXd c1(1,GRU_Neuron_Num);
+    MatrixXd a1(1,GRU_Neuron_Num);
+	MatrixXd c2(1,GRU_Neuron_Num);
+    MatrixXd a2(1,GRU_Neuron_Num);
+	MatrixXd c3(1,GRU_Neuron_Num);
+    MatrixXd a3(1,GRU_Neuron_Num);
+	MatrixXd c4(1,GRU_Neuron_Num);
+    MatrixXd a4(1,GRU_Neuron_Num);
 	// Initialize the c0 as zero
 	
-	MatrixXd c0 = MatrixXd::Zero(1,8);
+	MatrixXd c0 = MatrixXd::Zero(1,GRU_Neuron_Num);
 	
 	// x.block(a,b,x,y)extract inputs, start from(a,b), size is (x,y)
-	MatrixXd x0 = x.block(0,0,1,4);
-	MatrixXd x1 = x.block(1,0,1,4);
-	MatrixXd x2 = x.block(2,0,1,4);
-	MatrixXd x3 = x.block(3,0,1,4);
-	MatrixXd x4 = x.block(4,0,1,4);
+	MatrixXd x0 = input.block(0,0,1,4);
+	MatrixXd x1 = input.block(1,0,1,4);
+	MatrixXd x2 = input.block(2,0,1,4);
+	MatrixXd x3 = input.block(3,0,1,4);
+	MatrixXd x4 = input.block(4,0,1,4);
 
 	// GRU_Forward for 5 timesteps
-	GRU_Cell(c0, x0, c1, a1, WG, bG, Wc, bc );
-	GRU_Cell(c1, x1, c2, a2, WG, bG, Wc, bc );
-	GRU_Cell(c2, x2, c3, a3, WG, bG, Wc, bc );
-	GRU_Cell(c3, x3, c4, a4, WG, bG, Wc, bc );
-	GRU_Cell(c4, x4, c, a, WG, bG, Wc, bc );
+	GRU_Cell(c0, x0, c1, WG, bG, Wc, bc );
+	GRU_Cell(c1, x1, c2, WG, bG, Wc, bc );
+	GRU_Cell(c2, x2, c3, WG, bG, Wc, bc );
+	GRU_Cell(c3, x3, c4, WG, bG, Wc, bc );
+	GRU_Cell(c4, x4, output, WG, bG, Wc, bc );
 }
 
 void MDN::FC_3(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output, const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W1, const Eigen::MatrixXd& W2,
@@ -165,12 +152,9 @@ void MDN::FC_3(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output, const Eigen::Mat
 	Eigen::MatrixXd Output0;
 	Eigen::MatrixXd Output1;
 	Eigen::MatrixXd Output2;
-	std::vector<std::vector<Eigen::MatrixXd> > cache0;
-	std::vector<std::vector<Eigen::MatrixXd> > cache1;
-	std::vector<Eigen::MatrixXd> cache2;
 
-	linear_activation_forward(Input, W0, b0, "tanh", Output0, cache0);
-	linear_forward(Output0, W2, b2, Output2, cache2);
+	linear_activation_forward(Input, W0, b0, "tanh", Output0);
+	linear_forward(Output0, W2, b2, Output2);
 	Output = Output2;
 }
 
@@ -181,12 +165,10 @@ void MDN::Post_process(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output)
 	MatrixXd mu = 	  Input.block(0,1,1,2);
 	MatrixXd sigma =  Input.block(0,3,1,2);
 	MatrixXd cor =    Input.block(0,5,1,1);
-	vector<Eigen::MatrixXd> cache1;
-	vector<Eigen::MatrixXd> cache2;
 
-	Soft_max(weight, weight, cache1);
+	Soft_max(weight, weight);
 	sigma = sigma.array().exp();
-	tanh(cor, cor, cache2);
+	tanh(cor, cor);
 	output << weight,
 			  mu,
 			  sigma,
@@ -199,11 +181,10 @@ void MDN::MDN_Model(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output,
  const Eigen::MatrixXd& WG, const Eigen::VectorXd& bG, const Eigen::MatrixXd& Wc,const Eigen::MatrixXd& bc,
  const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W1, const Eigen::MatrixXd& W2, const Eigen::VectorXd& b0, const Eigen::VectorXd& b1, const Eigen::VectorXd& b2)
 {
-	Eigen::MatrixXd GRU_c;
-    Eigen::MatrixXd GRU_a;
+	Eigen::MatrixXd GRU_output;
 	Eigen::MatrixXd FC_Output;
-	GRU_Foward(Input, GRU_c,  GRU_a, WG, bG, Wc, bc);
-	FC_3(GRU_a, FC_Output, W0, W1, W2, b0, b1, b2);
+	GRU_Foward(Input, GRU_output, WG, bG, Wc, bc);
+	FC_3(GRU_output, FC_Output, W0, W1, W2, b0, b1, b2);
 	Post_process(FC_Output, Output);
 }
 
@@ -306,14 +287,13 @@ void MDN::pdf_mix2D_Gaussian(Eigen::MatrixXd& Input_Speed, double& likelihood, E
 
 void MDN::get_likelihood(Eigen::MatrixXd& Input_Speed, Eigen::MatrixXd& Input_History, double& likelihood)
 {   
-    MatrixXd Output_F = MatrixXd::Ones(1,8);
-    MatrixXd Output = MatrixXd::Ones(1,8);
-    MatrixXd c(1,8);
-    MatrixXd a(1,8);
+    MatrixXd Output_F = MatrixXd::Ones(1,6);
+    MatrixXd Output = MatrixXd::Ones(1,6);
+    MatrixXd c(1,GRU_Neuron_Num);
+    MatrixXd a(1,GRU_Neuron_Num);
     MDN::load_Parameter(path_WG, WG, path_bG, bG, path_Wc, Wc, path_bc, bc, path_W0, W0, path_b0, b0, path_W1, W1, path_b1, b1, path_W2, W2, path_b2, b2);
-    MDN::GRU_Foward(Input_History, c, a, WG, bG, Wc, bc);
+    MDN::GRU_Foward(Input_History, c, WG, bG, Wc, bc);
     MDN::FC_3(c, Output, W0, W1, W2, b0, b1, b2);
     MDN::Post_process(Output, Output_F);
     MDN::pdf_mix2D_Gaussian(Input_Speed, likelihood, Output_F);
 }
-
