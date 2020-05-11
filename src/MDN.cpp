@@ -17,16 +17,12 @@ MDN::MDN()
     Wc = MatrixXd::Ones(input_length + GRU_Neuron_Num, GRU_Neuron_Num);
     bc = MatrixXd::Ones(GRU_Neuron_Num, 1);
     W0 = MatrixXd::Ones(GRU_Neuron_Num, Hidden_dim);
-    W1 = MatrixXd::Ones(Hidden_dim,Hidden_dim);
     W2 = MatrixXd::Ones(Hidden_dim,6);
     b0 = MatrixXd::Ones(Hidden_dim,1);
-    b1 = MatrixXd::Ones(Hidden_dim,1);
     b2 = MatrixXd::Ones(6,1);
 	        //    /home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h0.txt
     path_W0 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h0.txt";
     path_b0 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h0.txt";
-    path_W1 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h1.txt";
-    path_b1 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h1.txt";
     path_W2 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_h2.txt";
     path_b2 = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/bias_h2.txt";
     path_Wc = "/home/letian/MDN/Benchmark_copy/newly_trained_MDN/MDN/Parameter/weights_rnn_candidate.txt";
@@ -146,8 +142,8 @@ const Eigen::MatrixXd& WG, const Eigen::MatrixXd& bG, const Eigen::MatrixXd& Wc,
 	GRU_Cell(c4, x4, output, WG, bG, Wc, bc );
 }
 
-void MDN::FC_3(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output, const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W1, const Eigen::MatrixXd& W2,
-	const Eigen::VectorXd& b0,  const Eigen::VectorXd& b1,  const Eigen::VectorXd& b2)
+void MDN::FC_3(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output, const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W2,
+	const Eigen::VectorXd& b0,  const Eigen::VectorXd& b2)
 {
 	Eigen::MatrixXd Output0;
 	Eigen::MatrixXd Output1;
@@ -178,13 +174,13 @@ void MDN::Post_process(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output)
 
 // The MDN consists of a GRU networks of 5 timesteps and a FC network of 3 layers, postprocess the output for the final output
 void MDN::MDN_Model(Eigen::MatrixXd& Input, Eigen::MatrixXd& Output,
- const Eigen::MatrixXd& WG, const Eigen::VectorXd& bG, const Eigen::MatrixXd& Wc,const Eigen::MatrixXd& bc,
- const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W1, const Eigen::MatrixXd& W2, const Eigen::VectorXd& b0, const Eigen::VectorXd& b1, const Eigen::VectorXd& b2)
+ const Eigen::MatrixXd& WG, const Eigen::VectorXd& bG, const Eigen::MatrixXd& Wc, const Eigen::MatrixXd& bc,
+ const Eigen::MatrixXd& W0, const Eigen::MatrixXd& W2, const Eigen::VectorXd& b0, const Eigen::VectorXd& b2)
 {
 	Eigen::MatrixXd GRU_output;
 	Eigen::MatrixXd FC_Output;
 	GRU_Foward(Input, GRU_output, WG, bG, Wc, bc);
-	FC_3(GRU_output, FC_Output, W0, W1, W2, b0, b1, b2);
+	FC_3(GRU_output, FC_Output, W0, W2, b0, b2);
 	Post_process(FC_Output, Output);
 }
 
@@ -222,7 +218,6 @@ void MDN::load_Parameter(
  const std::string& path_WG, Eigen::MatrixXd& WG, const std::string& path_bG, Eigen::MatrixXd& bG,
  const std::string& path_Wc, Eigen::MatrixXd& Wc, const std::string& path_bc, Eigen::MatrixXd& bc,
  const std::string& path_W0, Eigen::MatrixXd& W0, const std::string& path_b0, Eigen::MatrixXd& b0,
- const std::string& path_W1, Eigen::MatrixXd& W1, const std::string& path_b1, Eigen::MatrixXd& b1,
  const std::string& path_W2, Eigen::MatrixXd& W2, const std::string& path_b2, Eigen::MatrixXd& b2
 )
 { 
@@ -232,8 +227,6 @@ void MDN::load_Parameter(
 	load_txt(path_bc, bc);
 	load_txt(path_W0, W0);
 	load_txt(path_b0, b0);
-	load_txt(path_W1, W1);
-	load_txt(path_b1, b1);
 	load_txt(path_W2, W2);
 	load_txt(path_b2, b2);
 
@@ -241,13 +234,11 @@ void MDN::load_Parameter(
   	WG = WG * 10e-13;
   	Wc = Wc * 10e-13;
   	W0 = W0 * 10e-13;
-  	W1 = W1 * 10e-13;
   	W2 = W2 * 10e-13;
 
 	bG = bG * 10e-13;
 	bc = bc * 10e-13;
 	b0 = b0 * 10e-13;
-	b1 = b1 * 10e-13;
 	b2 = b2 * 10e-13;
 
 }
@@ -291,9 +282,9 @@ void MDN::get_likelihood(Eigen::MatrixXd& Input_Speed, Eigen::MatrixXd& Input_Hi
     MatrixXd Output = MatrixXd::Ones(1,6);
     MatrixXd c(1,GRU_Neuron_Num);
     MatrixXd a(1,GRU_Neuron_Num);
-    MDN::load_Parameter(path_WG, WG, path_bG, bG, path_Wc, Wc, path_bc, bc, path_W0, W0, path_b0, b0, path_W1, W1, path_b1, b1, path_W2, W2, path_b2, b2);
+    MDN::load_Parameter(path_WG, WG, path_bG, bG, path_Wc, Wc, path_bc, bc, path_W0, W0, path_b0, b0, path_W2, W2, path_b2, b2);
     MDN::GRU_Foward(Input_History, c, WG, bG, Wc, bc);
-    MDN::FC_3(c, Output, W0, W1, W2, b0, b1, b2);
+    MDN::FC_3(c, Output, W0, W2, b0, b2);
     MDN::Post_process(Output, Output_F);
     MDN::pdf_mix2D_Gaussian(Input_Speed, likelihood, Output_F);
 }
